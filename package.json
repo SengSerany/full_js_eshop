@@ -1,0 +1,32 @@
+{
+  "name": "full_js_eshop",
+  "version": "1.0.0",
+  "description": "test project for learn to do an app in full javascript",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SengSerany/full_js_eshop.git"
+  },
+  "keywords": [
+    "nodejs",
+    "vuejs",
+    "eshop",
+    "exercice",
+    "test",
+    "learn",
+    "learning"
+  ],
+  "author": "Sérany SENG",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SengSerany/full_js_eshop/issues"
+  },
+  "homepage": "https://github.com/SengSerany/full_js_eshop#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.8.5"
+  }
+}
