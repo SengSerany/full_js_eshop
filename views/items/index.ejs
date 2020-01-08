@@ -1,0 +1,10 @@
+<%- include('./../layout/header') -%>
+
+    <h1>Eshop</h1>
+        <br/>
+    <% items.forEach(item => { %>
+        <p><%= item.name %><br/>
+        <%= item.price%>€</p>
+    <% }); %>
+    
+<%- include('./../layout/footer') -%>

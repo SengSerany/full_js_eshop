@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/SengSerany/full_js_eshop#readme",
   "dependencies": {
+    "ejs": "^3.0.1",
     "express": "^4.17.1",
     "mongoose": "^5.8.5"
   }
