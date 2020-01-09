@@ -3,8 +3,8 @@
     <h1>Eshop</h1>
         <br/>
     <% items.forEach(item => { %>
-        <p><%= item.name %><br/>
-        <%= item.price%>€</p>
+        <a href="/items/<%= item._id%>"><p><%= item.name %><br/>
+        <%= item.price%>€</p></a>
     <% }); %>
     
 <%- include('./../layout/footer') -%>
