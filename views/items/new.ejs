@@ -1,0 +1,15 @@
+<%- include('./../layout/header') -%>
+
+<h1>Creer un nouveau produit</h1>
+
+<form action="/items/<%= item._id %>" method="POST">
+    <label for="name">Nom :</label><br/>
+    <input id="name" type="text" name="name"><br/>
+    <label for="description">Description :</label><br/>
+    <textarea id="description" name="description"></textarea><br/>
+    <label for="price">Prix :</label><br/>
+    <input id="price" type="number" name="price"><br/>
+    <input type="submit" value="enregister">
+</form>
+
+<%- include('./../layout/footer') -%>

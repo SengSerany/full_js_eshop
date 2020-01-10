@@ -1,9 +1,9 @@
 <%- include('./../layout/header') -%>
 
     <h1>Eshop</h1>
-        <br/>
+        <a href="items/new">Creer un produit</a>
     <% items.forEach(item => { %>
-        <a href="/items/<%= item._id%>"><p><%= item.name %><br/>
+        <a href="items/<%= item._id%>"><p><%= item.name %><br/>
         <%= item.price%>€</p></a>
     <% }); %>
     
