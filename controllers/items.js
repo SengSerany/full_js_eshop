@@ -18,13 +18,18 @@ router.get('/items/new', (req, res) => {
 });
 
 //delete
+router.get('/items/:id/remove', (req, res) => {
+    Item.findByIdAndRemove(req.params.id).then(() => {
+        res.redirect('/');
+    })
+});
 
 //edit
 router.get('/items/:id/edit', (req, res) => {
     Item.findById(req.params.id).then(item => {
         res.render('items/edit', {item: item, errors: undefined});
     })
-})
+});
 
 //update
 router.post('/items/:id/update', (req, res) => {

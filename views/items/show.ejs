@@ -3,8 +3,9 @@
     <h1><%= item.name %></h1>
     <p><%= item.description %></p>
         <br />
-    <p>Prix: <%= item.price %></p>
+    <p>Prix: <%= item.price %>€</p>
         <br />
     <a href="/items/<%= item._id %>/edit">Modifier le produit</a>
+    <a href="/items/<%= item._id %>/remove">Supprimer le produit</a>
 
 <%- include('./../layout/footer') -%>
