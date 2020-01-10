@@ -5,7 +5,8 @@ require('./models/Items');
 
 const app = express();
 
-mongoose.connect('mongodb://127.0.0.1/eshop', {useNewUrlParser: true});
+const mongoDB = 'mongodb+srv://SengSerany:Diswallah3@cluster0-ozjti.gcp.mongodb.net/local_library?retryWrites=true&w=majority';
+mongoose.connect(mongoDB, {useNewUrlParser: true, useFindAndModify: false });
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {

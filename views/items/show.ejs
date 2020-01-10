@@ -4,5 +4,7 @@
     <p><%= item.description %></p>
         <br />
     <p>Prix: <%= item.price %></p>
+        <br />
+    <a href="/items/<%= item._id %>/edit">Modifier le produit</a>
 
 <%- include('./../layout/footer') -%>
