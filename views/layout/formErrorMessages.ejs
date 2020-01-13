@@ -1,5 +1,5 @@
-<% if (errors !== undefined) { %>
+<% if (typeof errors != 'undefined') { %>
     <p><% errors.forEach( error => { %>
-        <%= JSON.stringify(error.msg) %><br/>
+        <%= error.msg %><br/>
     <% }); %></p>
 <% } %>

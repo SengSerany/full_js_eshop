@@ -1,11 +1,12 @@
 const router = require('express').Router();
 const passport = require('passport');
+const bcrypt = require('bcryptjs');
 let User = require('./../models/Users');
 const { body,validationResult } = require('express-validator');
 const { sanitizeBody } = require('express-validator');
 
 router.get('/login', (req, res) => {
-    res.render('users/login');
+    res.render('users/login', { errors: undefined });
 })
 
 router.post('/login', passport.authenticate('local'), (req, res) => {
@@ -13,8 +14,7 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
 })
 
 router.get('/register', (req, res) => {
-    let errors = undefined;
-    res.render('users/register', {errors: errors});
+    res.render('users/register', { errors: undefined });
 })
 
 router.post('/register', [
@@ -37,26 +37,40 @@ router.post('/register', [
                     }
                 })
 ], (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.render('users/register', {errors: errors.array()});
-    }
-
-    const { username, email, password, confirmPassword } = req.body;
-    User.findOne({ email: email}).then( user => {
-        if (user){
-            return res.render('users/register', { errors: ["L'email est déja utilisé."]})
+    new Promise((resolve, reject) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.render('users/register', {errors: errors.array()});
         }
-    })
-    User.create({
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
-        date: req.body.date
-    }).then( user => {
-        res.render('/')
-    })
 
+        User.findOne({ email: req.body.email}).then( user => {
+        if (user){
+            return res.render('users/register', { errors: [{ msg: "L'adresse email est déja utilisé."}]})
+        }})
+        const user = new User({
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password
+        })
+
+        bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(user.password, salt, (err, hash) => {
+                if (err) throw err;
+                user.password = hash;
+    
+                if (user.save()){
+                    req.flash('success_msg', 'Votre compte a bien été créé !')
+                    resolve(res.redirect('/users/login'));
+                } else {
+                    reject(res.render('users/register', { errors: [{ msg: "Une erreur est survenue. Veillez reéssayer"}]}));
+                }
+            });
+        });
+
+    });
+    
+
+    
 })
 
 module.exports = router;

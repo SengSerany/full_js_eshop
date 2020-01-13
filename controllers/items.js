@@ -13,8 +13,7 @@ router.get('/', (req, res) => {
 //new
 router.get('/items/new', (req, res) => {
     let item = new Item();
-    let errors = undefined;
-    res.render('items/new', {item: item, errors: errors});
+    res.render('items/new', {item: item});
 });
 
 //delete
@@ -27,7 +26,7 @@ router.get('/items/:id/remove', (req, res) => {
 //edit
 router.get('/items/:id/edit', (req, res) => {
     Item.findById(req.params.id).then(item => {
-        res.render('items/edit', {item: item, errors: undefined});
+        res.render('items/edit', {item: item});
     })
 });
 
