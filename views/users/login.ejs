@@ -1,3 +1,14 @@
 <%- include('./../layout/header') -%>
+<%- include('./../layout/formErrorMessages') -%>
+
 <h1>Se connecter</h1>
+
+<form action="/users/login" method="POST">
+    <label for="email">Email</label><br/>
+    <input id="email" type="email" name="email" required><br/>
+    <label for="password">Mot de passe :</label><br/>
+    <input for="password" type="password" name="password" required><br/><br/>
+    <input type="submit" value="Se connecter">
+</form><br/>
+<a href="/users/register">S'inscrire</a>
 <%- include('./../layout/footer') -%>

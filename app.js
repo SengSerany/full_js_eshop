@@ -4,10 +4,13 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 
 require('./models/Items');
+require('./models/Users');
 
 const app = express();
 
-const mongoDB = 'mongodb+srv://SengSerany:Diswallah3@cluster0-ozjti.gcp.mongodb.net/local_library?retryWrites=true&w=majority';
+require('dotenv').config()
+
+const mongoDB = process.env.mongoDbServer;
 mongoose.connect(mongoDB, {useNewUrlParser: true, useFindAndModify: false });
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -16,11 +19,11 @@ db.once('open', function() {
 });
 
 app.set('view engine', 'ejs');
+app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use('/', require('./controllers/items'));
 app.use('/items', require('./controllers/items'));
 app.use('/users', require('./controllers/users'));
-app.use('/', require('./controllers/items'));
-
 
 app.listen(3000);

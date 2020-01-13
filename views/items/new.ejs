@@ -1,10 +1,6 @@
 <%- include('./../layout/header') -%>
 
-<% if (errors !== undefined) { %>
-    <p><% errors.forEach( error => { %>
-        The <%= JSON.stringify(error.param) %> have an <%= JSON.stringify(error.msg) %><br/>
-    <% }); %></p>
-<% } %>
+<%- include('./../layout/formErrorMessages') -%>
 
 <h1>Creer un nouveau produit</h1>
 
@@ -14,7 +10,7 @@
     <label for="description">Description :</label><br/>
     <textarea id="description" name="description"></textarea><br/>
     <label for="price">Prix :</label><br/>
-    <input id="price" type="number" name="price"><br/>
+    <input id="price" type="number" name="price"><br/><br/>
     <input type="submit" value="enregister">
 </form>
 

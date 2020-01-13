@@ -1,3 +1,18 @@
 <%- include('./../layout/header') -%>
+<%- include('./../layout/formErrorMessages') -%>
+
 <h1>S'inscrire</h1>
+
+<form action="/users/register" method="POST">
+    <label for="username">Nom d'utilisateur :</label><br/>
+    <input id="username" type="text" name="username" required><br/>
+    <label for="email">Email</label><br/>
+    <input id="email" type="email" name="email" required><br/>
+    <label for="password">Mot de passe :</label><br/>
+    <input for="password" type="password" name="password" required><br/>
+    <label for="confirmPassword">Confirmer le mot de passe :</label><br/>
+    <input for="confirmPassword" type="password" name="confirmPassword" required><br/><br/>
+    <input type="submit" value="S'inscrire">
+</form><br/>
+<a href="/users/login">Se connecter</a>
 <%- include('./../layout/footer') -%>

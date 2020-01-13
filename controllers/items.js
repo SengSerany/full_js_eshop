@@ -32,7 +32,24 @@ router.get('/items/:id/edit', (req, res) => {
 });
 
 //update
-router.post('/items/:id/update', (req, res) => {
+router.post('/items/:id/update', [
+    body('name')
+                .trim()
+                .escape()
+                .isLength({ min: 3 }).withMessage('Le nom doit être renseigné et dois faire au moins 3 lettres.'),
+    body('description')
+                .trim()
+                .escape(),
+    body('price')
+                .isNumeric()
+                .withMessage('Le Le prix doit être un nombre.')
+], (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        Item.findById(req.params.id).then(item => {
+            res.render('items/edit', {item: item, errors: errors.array()});
+        })
+    }
     Item.findByIdAndUpdate(req.params.id, {$set: req.body}, { new: true }).then(item => {
         res.render('items/show', {item: item});
     })
@@ -47,9 +64,16 @@ router.get('/items/:id', (req, res) => {
 
 //create
 router.post('/items/:id', [
-    body('name').notEmpty({ errorMessage: 'Vous n\'avez pas renseigné de nom au produit.'}),
-    body('description').trim().escape(),
-    body('price').isNumeric({ errorMessage: 'Le prix du produit dois être un nombre décimal.'})
+    body('name')
+                .trim()
+                .escape()
+                .isLength({ min: 3 }).withMessage('Le nom doit être renseigné et dois faire au moins 3 lettres.'),
+    body('description')
+                .trim()
+                .escape(),
+    body('price')
+                .isNumeric()
+                .withMessage('Le Le prix doit être un nombre.')
 ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -64,7 +88,6 @@ router.post('/items/:id', [
         res.render('items/show', {item: item})
     })
 });
-
 
 
 module.exports = router;

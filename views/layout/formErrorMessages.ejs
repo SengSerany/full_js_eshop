@@ -1,0 +1,5 @@
+<% if (errors !== undefined) { %>
+    <p><% errors.forEach( error => { %>
+        <%= JSON.stringify(error.msg) %><br/>
+    <% }); %></p>
+<% } %>

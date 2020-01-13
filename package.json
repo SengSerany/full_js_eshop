@@ -27,6 +27,7 @@
   "homepage": "https://github.com/SengSerany/full_js_eshop#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "express-validator": "^6.3.1",
