@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+
 require('./models/Items');
 
 const app = express();
@@ -16,7 +18,9 @@ db.once('open', function() {
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use('/', require('./controllers/items'));
 app.use('/items', require('./controllers/items'));
+app.use('/users', require('./controllers/users'));
+app.use('/', require('./controllers/items'));
+
 
 app.listen(3000);
