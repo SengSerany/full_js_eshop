@@ -12,6 +12,8 @@ const upload = multer({
 
 require('./models/Items');
 require('./models/Users');
+require('./models/ItemsInCarts');
+require('./models/Carts');
 
 const app = express();
 
@@ -50,5 +52,6 @@ app.use((req, res, next) => {
 app.use('/', require('./controllers/items'));
 app.use('/items', require('./controllers/items'));
 app.use('/users', require('./controllers/users'));
+app.use('/carts', require('./controllers/carts'));
 
 app.listen(3000);

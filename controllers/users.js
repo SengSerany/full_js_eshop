@@ -2,6 +2,7 @@ const router = require('express').Router();
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
 let User = require('./../models/Users');
+let Cart = require('./../models/Carts');
 const { body,validationResult } = require('express-validator');
 const { sanitizeBody } = require('express-validator');
 const { ensureAuthenticated } = require('./../config/auth');
@@ -64,6 +65,9 @@ router.post('/register', [
                 user.password = hash;
     
                 if (user.save()){
+                    Cart.create({
+                        user: user._id
+                    });
                     req.flash('success_msg', 'Votre compte a bien été créé !')
                     resolve(res.redirect('/users/login'));
                 } else {
