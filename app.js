@@ -10,7 +10,8 @@ require('./models/Users');
 
 const app = express();
 
-require('dotenv').config()
+require('dotenv').config();
+require('./config/passport')(passport);
 
 const mongoDB = process.env.mongoDbServer;
 mongoose.connect(mongoDB, {useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true });
@@ -29,10 +30,14 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(flash());
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
+  res.locals.login = req.isAuthenticated();
+  res.locals.error = req.flash('error');
   next();
 })
 app.use('/', require('./controllers/items'));

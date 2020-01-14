@@ -4,14 +4,19 @@ const bcrypt = require('bcryptjs');
 let User = require('./../models/Users');
 const { body,validationResult } = require('express-validator');
 const { sanitizeBody } = require('express-validator');
+const { ensureAuthenticated } = require('./../config/auth');
 
 router.get('/login', (req, res) => {
     res.render('users/login', { errors: undefined });
 })
 
-router.post('/login', passport.authenticate('local'), (req, res) => {
-
-})
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', {
+        successRedirect: '/users/dashboard',
+        failureRedirect: '/users/login',
+        failureFlash: true
+    })(req, res, next);
+});
 
 router.get('/register', (req, res) => {
     res.render('users/register', { errors: undefined });
@@ -68,9 +73,16 @@ router.post('/register', [
         });
 
     });
-    
+})
 
-    
+router.get('/dashboard', ensureAuthenticated, (req, res) => {
+    res.render('users/dashboard', { user: req.user });
+})
+
+router.get('/logout', (req, res) => {
+    req.logout();
+    req.flash('success_msg', 'Vous êtes bien déconnecté !');
+    res.redirect('/users/login');
 })
 
 module.exports = router;
