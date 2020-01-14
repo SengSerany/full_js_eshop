@@ -49,7 +49,12 @@ router.post('/items/:id/update', [
             res.render('items/edit', {item: item, errors: errors.array()});
         })
     }
-    Item.findByIdAndUpdate(req.params.id, {$set: req.body}, { new: true }).then(item => {
+    Item.findByIdAndUpdate(req.params.id, {
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price,
+        picture: req.file.filename
+    }, { new: true, upsert: true }).then(item => {
         res.render('items/show', {item: item});
     })
 });
@@ -82,7 +87,8 @@ router.post('/items/:id', [
     Item.create({
         name: req.body.name.replace(/<[^>]*>?/gm,""),
         description: req.body.description.replace(/<[^>]*>?/gm,""),
-        price: req.body.price
+        price: req.body.price,
+        picture: req.file.filename
     }).then( item => {
         res.render('items/show', {item: item})
     })

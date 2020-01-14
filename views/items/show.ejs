@@ -1,8 +1,10 @@
 <%- include('./../layout/header') -%>
 
     <h1><%= item.name %></h1>
+    <% if (item.picture !== undefined) {%>
+    <img src="/uploads/<%= item.picture %>" alt="image du produit">
+    <% } %>
     <p><%= item.description %></p>
-        <br />
     <p>Prix: <%= item.price %>€</p>
         <br />
     <a href="/items/<%= item._id %>/edit">Modifier le produit</a>

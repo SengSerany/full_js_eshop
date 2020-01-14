@@ -3,13 +3,15 @@
 
 <h1>Modifier le produit</h1>
 
-<form action="/items/<%= item._id %>/update" method="POST">
+<form action="/items/<%= item._id %>/update" method="POST" enctype="multipart/form-data">
     <label for="name">Nom :</label><br/>
     <input id="name" type="text" name="name" value="<%= item.name %>" required><br/>
     <label for="description">Description :</label><br/>
     <textarea id="description" name="description"><%=item.description%></textarea><br/>
     <label for="price">Prix :</label><br/>
     <input id="price" type="number" name="price" value="<%= item.price %>" required><br/><br/>
+    <label for="file">Image</label><br/>
+    <input type="file" id="file" name="file"><br/><br/>   
     <input type="submit" value="enregister">
 </form>
 

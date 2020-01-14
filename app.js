@@ -4,6 +4,11 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session')
+const multer = require('multer');
+
+const upload = multer({
+  dest: './uploads'
+})
 
 require('./models/Items');
 require('./models/Users');
@@ -25,6 +30,8 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(upload.single('file'));
+app.use('/uploads', express.static('./uploads'))
 app.use(session({
   secret: process.env.sessionKey,
   resave: true,

@@ -4,13 +4,15 @@
 
 <h1>Creer un nouveau produit</h1>
 
-<form action="/items/<%= item._id %>" method="POST">
+<form action="/items/<%= item._id %>" method="POST" enctype="multipart/form-data">
     <label for="name">Nom :</label><br/>
-    <input id="name" type="text" name="name"><br/>
+    <input id="name" type="text" name="name" required><br/>
     <label for="description">Description :</label><br/>
     <textarea id="description" name="description"></textarea><br/>
     <label for="price">Prix :</label><br/>
-    <input id="price" type="number" name="price"><br/><br/>
+    <input id="price" type="number" name="price" required><br/><br/>
+    <label for="file">Image</label><br/>
+    <input type="file" id="file" name="file"><br/><br/>
     <input type="submit" value="enregister">
 </form>
 
